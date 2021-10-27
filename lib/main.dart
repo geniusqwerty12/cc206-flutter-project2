@@ -10,13 +10,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Clicker Counter Home Page'),
+      home: MyHomePage(title: 'Log In'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key, this.title}) : super(key: key);
+
   final String title;
 
   @override
@@ -24,52 +25,64 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var userName;
+  var passWord;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+  final userCon = TextEditingController();
+  final passCon = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(15),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Center(
-              child: Image(
-                image: NetworkImage('https://image.freepik.com/free-vector/fairy-tale-castle-mountains-night_107791-5330.jpg'),
-                height: 180,
-                width: 180,
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: TextField(
+                controller: userCon,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'User Name',
+                  hintText: 'Enter Your Name',
+                ),
               ),
             ),
-            Container(color: Colors.orange),
-            Text(
-              'You have pushed the button this many times:',
+            Padding(
+              padding: EdgeInsets.all(15),
+              child: TextField(
+                controller: passCon,
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  hintText: 'Enter Password',
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: TextStyle(fontSize: 25),
+            Column(
+              children: <Widget>[
+                RaisedButton(
+                  child: Text("Log In"),
+                  onPressed: () {
+                    setState(() {
+                      userName = userCon.text;
+                      passWord = passCon.text;
+                    });
+                  },
+                  color: Colors.lightBlue,
+                  textColor: Colors.white,
+                  splashColor: Colors.blueGrey,
+                ),
+                Text("User $userName with password $passWord is trying to log in.")
+              ],
             ),
-            Text(
-              'Edited by: Christian Facon'
-              ' and Glendon Cabrias',
-              style: TextStyle(fontSize: 15),
-            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
