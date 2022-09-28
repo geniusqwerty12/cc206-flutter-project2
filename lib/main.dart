@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// Mary Ruth N. Lusuegro BSCS 3A
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -98,3 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+void newFunction() {
+		  print("This is a new function");
+		}
+
